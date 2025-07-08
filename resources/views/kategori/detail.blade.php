@@ -54,14 +54,19 @@
                         <tbody>
 
                             @foreach ($buku as $item)
+                                
+                            @endforeach
+
+                            @if ($buku->isEmpty())
+                                <tr>
+                                    <td colspan="4" class="text-center py-4">Buku belum ditambahkan pada kategori ini.</td>
+                                </tr>
+                            @endif
                             
-                                @if ($item->isEmpty())
-                                    <tr>
-                                        <td colspan="4"> belum ada buku di kategori ini </td>
-                                    </tr>
-                                @endif
+
+                            
+
                         </tbody>
-                        @endforeach
 
 
                     </table>

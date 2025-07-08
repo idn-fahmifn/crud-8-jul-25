@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
+use App\Models\B;
 use App\Models\Buku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -57,7 +58,7 @@ class KategoriController extends Controller
     public function show($id)
     {
         $data = Kategori::find($id);
-        $buku = Buku::where('id_kategori', $id)->get()->all();
+        $buku = Buku::where('id_kategori', $id)->get();
         return view('kategori.detail', compact('data', 'buku'));
     }
 
