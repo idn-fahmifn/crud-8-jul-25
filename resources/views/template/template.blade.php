@@ -10,13 +10,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <title>Simple CRUD</title>
+    <style>
+        .bg-pink {
+            background: #ff005d;
+        }
+    </style>
 
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">My Book</a>
+    <nav class="navbar navbar-expand-lg bg-pink navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Library</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -36,6 +41,12 @@
             </div>
         </div>
     </nav>
+
+    <div class="mt-4">
+        @yield('content')
+    </div>
+
+
 </body>
 
 </html>
