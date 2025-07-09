@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        gambar
+                        <img src="{{asset('storage/images/cover/'.$data->cover)}}" alt="Cover" width="400">
                     </div>
                 </div>
 
