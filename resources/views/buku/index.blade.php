@@ -22,7 +22,7 @@
 
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-                        <strong>Sukses!</strong> {{session('success')}}.
+                        <strong>Sukses!</strong> {{ session('success') }}.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
@@ -32,7 +32,7 @@
                         <strong>Gagal!</strong>
                         <ol>
                             @foreach ($errors->all() as $item)
-                                <li>{{$item}}</li>
+                                <li>{{ $item }}</li>
                             @endforeach
                         </ol>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -51,9 +51,9 @@
                         <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td>{{$item->nama_kategori}}</td>
+                                    <td>{{ $item->nama_kategori }}</td>
                                     <td>
-                                        <a href="{{route('kategori.show',$item->id)}}" class="btn">Detail</a>
+                                        <a href="{{ route('kategori.show', $item->id) }}" class="btn">Detail</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -68,17 +68,57 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah kategori Baru</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Buku Baru</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="{{ route('kategori.store') }}" method="post">
+                <form action="{{ route('buku.store') }}" method="post">
                     @csrf
                     <div class="modal-body">
+                        {{-- judul buku --}}
                         <div class="form-group">
-                            <label for="" class="form-label">Nama Kategori</label>
-                            <input type="text" name="nama_kategori" required class="form-control">
+                            <label for="" class="form-label">Judul Buku</label>
+                            <input type="text" name="judul" required class="form-control">
                         </div>
+
+                        {{-- kategori buku --}}
+                        <div class="form-group">
+                            <label for="" class="form-label">Kategori</label>
+                            <select name="kategori" id="" class="form-control"></select>
+                        </div>
+
+                        {{-- Penerbit buku --}}
+                        <div class="form-group">
+                            <label for="" class="form-label">Penerbit</label>
+                            <input type="text" name="penerbit" required class="form-control">
+                        </div>
+
+                        {{-- Cover buku --}}
+                        <div class="form-group">
+                            <label for="" class="form-label">Cover Buku</label>
+                            <input type="file" name="cover" required class="form-control">
+                        </div>
+
+                        {{-- Penulis buku --}}
+                        <div class="form-group">
+                            <label for="" class="form-label">Penulis Buku</label>
+                            <input type="text" name="penulis" required class="form-control">
+                        </div>
+
+                        {{-- isbn --}}
+                        <div class="form-group">
+                            <label for="" class="form-label">ISBN</label>
+                            <input type="text" name="isbn" required class="form-control">
+                        </div>
+
+                        {{-- deskripsi --}}
+                        <div class="form-group">
+                            <label for="" class="form-label">Deskripsi</label>
+                            <textarea name="deskripsi" class="form-control"></textarea>
+                        </div>
+
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
