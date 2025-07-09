@@ -58,7 +58,7 @@ class KategoriController extends Controller
     public function show($id)
     {
         $data = Kategori::find($id);
-        $buku = Buku::where('id_kategori', $id)->get();
+        $buku = Buku::where('id_kategori', $id)->orderBy('judul_buku', 'ASC')->get();
         return view('kategori.detail', compact('data', 'buku'));
     }
 
