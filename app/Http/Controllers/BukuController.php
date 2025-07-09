@@ -112,7 +112,8 @@ class BukuController extends Controller
     public function show($id)
     {
         $data = Buku::find($id);
-        return view('buku.detail', compact('data'));
+        $kategori = Kategori::all();
+        return view('buku.detail', compact('data', 'kategori'));
     }
 
     /**

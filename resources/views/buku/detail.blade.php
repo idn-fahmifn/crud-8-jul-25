@@ -89,20 +89,63 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah kategori Baru</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit {{$data->judul_buku}}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="{{ route('kategori.update', $data->id) }}" method="post">
+                <form action="{{ route('buku.update', $data->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('put')
-
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="" class="form-label">Nama Kategori</label>
-                            <input type="text" name="nama_kategori" value="{{ $data->nama_kategori }}" required
-                                class="form-control">
+                        {{-- judul buku --}}
+                        <div class="form-group mt-2">
+                            <label for="" class="form-label">Judul Buku</label>
+                            <input type="text" name="judul" value="{{$data->judul_buku}}" required class="form-control">
                         </div>
+
+                        {{-- kategori buku --}}
+                        <div class="form-group mt-2">
+                            <label for="" class="form-label">Kategori</label>
+                            <select name="kategori" required class="form-control">
+                                <option value="{{$data->id_kategori}}">{{$data->kategori->nama_kategori}}</option>
+                                @foreach ($kategori as $item)
+                                    <option value="{{$item->id}}">{{$item->nama_kategori}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{-- Penerbit buku --}}
+                        <div class="form-group mt-2">
+                            <label for="" class="form-label">Penerbit</label>
+                            <input type="text" name="penerbit" value="{{$data->penerbit}}" required class="form-control">
+                        </div>
+
+                        {{-- Cover buku --}}
+                        <div class="form-group mt-2">
+                            <label for="" class="form-label">Cover Buku</label>
+                            <input type="file" name="cover" accept="image/*" value="{{$data->cover}}" class="form-control">
+                        </div>
+
+                        {{-- Penulis buku --}}
+                        <div class="form-group mt-2">
+                            <label for="" class="form-label">Penulis Buku</label>
+                            <input type="text" name="penulis" value="{{$data->penulis}}" required class="form-control">
+                        </div>
+
+                        {{-- isbn --}}
+                        <div class="form-group mt-2">
+                            <label for="" class="form-label">ISBN</label>
+                            <input type="text" name="isbn" value="{{$data->isbn}}" class="form-control">
+                        </div>
+
+                        {{-- deskripsi --}}
+                        <div class="form-group mt-2">
+                            <label for="" class="form-label">Deskripsi</label>
+                            <textarea name="deskripsi" class="form-control">
+                                {{$data->deskripsi}}
+                            </textarea>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
