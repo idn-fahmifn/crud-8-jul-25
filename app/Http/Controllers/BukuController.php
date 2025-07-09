@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use App\Models\Kategori;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BukuController extends Controller
@@ -77,8 +78,30 @@ class BukuController extends Controller
             'isbn.max' => 'ISBN maksimal 50 karakter',
 
             'deskripsi.required' => 'Deskripsi wajib diisi'
-        ]
-    );
+        ]);
+
+        // kondisi cek apabila terdapat file yang diupload di form.
+        if($request->hasFile('cover'))
+        {
+            $gambar = $request->file('cover'); //mengambil gambar di key cover
+            $path = 'public/images/cover'; //path tempat menyimpan buku
+            $format = $gambar->getClientOriginalExtension(); //mengambil format file yang diupload
+            $nama = 'cover-buku'.Carbon::now()->format('dmyhis').'.'.$format; //nama file ketika diupload
+            $gambar->storeAs($path, $nama); //menyimpan gambar dengan path dan nama yang sudah ditentukan.
+        }
+
+        // return $request;
+
+        Buku::create([
+            'id_kategori' => $request->kategori,
+            'judul_buku' => $request->judul,
+            'penerbit' => $request->penerbit,
+            'cover' => $nama,
+            'penulis' => $request->penulis,
+            'isbn' => $request->isbn,
+            'deskripsi' => $request->deskripsi
+        ]);
+
     }
 
     /**
