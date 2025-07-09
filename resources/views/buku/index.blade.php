@@ -72,47 +72,52 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="{{ route('buku.store') }}" method="post">
+                <form action="{{ route('buku.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         {{-- judul buku --}}
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="" class="form-label">Judul Buku</label>
                             <input type="text" name="judul" required class="form-control">
                         </div>
 
                         {{-- kategori buku --}}
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="" class="form-label">Kategori</label>
-                            <select name="kategori" id="" class="form-control"></select>
+                            <select name="kategori" required class="form-control">
+                                <option value="">Pilih Kategori</option>
+                                @foreach ($kategori as $item)
+                                    <option value="{{$item->id}}">{{$item->nama_kategori}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         {{-- Penerbit buku --}}
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="" class="form-label">Penerbit</label>
                             <input type="text" name="penerbit" required class="form-control">
                         </div>
 
                         {{-- Cover buku --}}
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="" class="form-label">Cover Buku</label>
-                            <input type="file" name="cover" required class="form-control">
+                            <input type="file" name="cover" accept="image/*" required class="form-control">
                         </div>
 
                         {{-- Penulis buku --}}
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="" class="form-label">Penulis Buku</label>
                             <input type="text" name="penulis" required class="form-control">
                         </div>
 
                         {{-- isbn --}}
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="" class="form-label">ISBN</label>
                             <input type="text" name="isbn" required class="form-control">
                         </div>
 
                         {{-- deskripsi --}}
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="" class="form-label">Deskripsi</label>
                             <textarea name="deskripsi" class="form-control"></textarea>
                         </div>
