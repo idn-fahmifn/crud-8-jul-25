@@ -8,7 +8,7 @@
             <div class="card-header bg-white mb-4 d-flex justify-content-between">
 
                 {{-- card-title --}}
-                <div class="card-title h4">Kategori buku</div>
+                <div class="card-title h4">Data Buku</div>
 
                 {{-- area-button --}}
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -43,7 +43,9 @@
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
-                            <th>Nama Kategori</th>
+                            <th>Judul Buku</th>
+                            <th>Penerbit</th>
+                            <th>Kategori</th>
                             <th>Pilihan</th>
                         </thead>
                         <tbody>
