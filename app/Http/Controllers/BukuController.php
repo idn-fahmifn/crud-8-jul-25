@@ -131,7 +131,7 @@ class BukuController extends Controller
     public function update(Request $request, $id)
     {
 
-        $data = Buku::find($id); 
+        $data = Buku::find($id);
         $input = $request->all();
 
         $request->validate(
@@ -182,7 +182,7 @@ class BukuController extends Controller
                 'deskripsi.required' => 'Deskripsi wajib diisi'
             ]
         );
-        
+
 
         $edit = [
             'id_kategori' => $request->input('kategori'),
@@ -199,29 +199,27 @@ class BukuController extends Controller
             $format = $gambar->getClientOriginalExtension(); //mengambil format file yang diupload
             $nama = 'cover-buku' . Carbon::now()->format('dmyhis') . '.' . $format; //nama file ketika diupload
             $gambar->storeAs($path, $nama); //menyimpan gambar dengan path dan nama yang sudah ditentukan.
-            
+
             // menghapus data lama dari local storage;
             // Storage::delete('public/images/cover/'.$data->cover);
 
-            if($data->cover && Storage::disk('public')->exists('public/images/cover'));
+            if ($data->cover && Storage::disk('public')->exists('public/images/cover'));
+            Storage::delete('public/images/cover/' . $data->cover);
             $edit['cover'] = $nama;
-
         }
-
         $data->update($edit);
-
-       
-
-        
-
         return back()->with('success', 'Buku berhasil dibuat');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $data = Buku::find($id);
+        $data->delete();
+        Storage::delete('public/images/cover/' . $data->cover);
+
+        return redirect()->route('buku.index')->with('success', 'Data berhasil dihapus');
     }
 }

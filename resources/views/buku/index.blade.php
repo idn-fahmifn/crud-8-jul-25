@@ -59,6 +59,11 @@
                                     </td>
                                 </tr>
                             @endforeach
+                             @if ($data->isEmpty())
+                                <tr>
+                                    <td colspan="4" class="text-center py-4">Buku belum ada.</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

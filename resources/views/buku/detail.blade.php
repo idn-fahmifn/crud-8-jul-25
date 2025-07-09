@@ -12,7 +12,7 @@
 
                 {{-- area-button --}}
 
-                <form action="{{ route('kategori.destroy', $data->id) }}" method="post">
+                <form action="{{ route('buku.destroy', $data->id) }}" method="post">
                     @csrf
                     @method('delete')
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formEdit">

@@ -55,6 +55,13 @@
                                     </td>
                                 </tr>
                             @endforeach
+
+                             @if ($data->isEmpty())
+                                <tr>
+                                    <td colspan="4" class="text-center py-4">kategori belu ada saat ini.</td>
+                                </tr>
+                            @endif
+
                         </tbody>
                     </table>
                 </div>
