@@ -56,7 +56,14 @@
                         <tbody>
 
                             @foreach ($buku as $item)
-                                
+                                <tr>
+                                    <td>{{$item->judul_buku}}</td>
+                                    <td>{{$item->penerbit}}</td>
+                                    <td>{{$item->penulis}}</td>
+                                    <td>
+                                        <a href="{{route('buku.show', $item->id)}}" class="btn">Detail</a>
+                                    </td>
+                                </tr>
                             @endforeach
 
                             @if ($buku->isEmpty())
