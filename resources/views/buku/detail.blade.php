@@ -8,11 +8,11 @@
             <div class="card-header bg-white mb-4 d-flex justify-content-between">
 
                 {{-- card-title --}}
-                <div class="card-title h4">Kategori {{ $data->nama_kategori }}</div>
+                <div class="card-title h4">{{ $data->judul_buku }}</div>
 
                 {{-- area-button --}}
 
-                <form action="{{route('kategori.destroy', $data->id)}}" method="post">
+                <form action="{{ route('kategori.destroy', $data->id) }}" method="post">
                     @csrf
                     @method('delete')
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formEdit">
@@ -44,31 +44,43 @@
                     </div>
                 @endif
 
-                {{-- menampilkan tabel kategori --}}
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <th>Judul Buku</th>
-                            <th>Penerbit</th>
-                            <th>Penulis</th>
-                            <th>Pilihan</th>
-                        </thead>
-                        <tbody>
-
-                            @foreach ($buku as $item)
-                                
-                            @endforeach
-
-                            @if ($buku->isEmpty())
-                                <tr>
-                                    <td colspan="4" class="text-center py-4">Buku belum ditambahkan pada kategori ini.</td>
-                                </tr>
-                            @endif
-                        </tbody>
-
-
-                    </table>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>Judul Buku</td>
+                                        <td>{{ $data->judul_buku }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Penulis</td>
+                                        <td>{{ $data->penulis }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ISBN</td>
+                                        <td>{{ $data->isbn }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Penerbit</td>
+                                        <td>{{ $data->penerbit }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            {{$data->deskripsi}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        gambar
+                    </div>
                 </div>
+
+
+
             </div>
         </div>
     </div>

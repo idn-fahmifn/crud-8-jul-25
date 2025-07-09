@@ -102,14 +102,17 @@ class BukuController extends Controller
             'deskripsi' => $request->deskripsi
         ]);
 
+        return back()->with('success', 'Buku berhasil dibuat');
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $data = Buku::find($id);
+        return view('buku.detail', compact('data'));
     }
 
     /**

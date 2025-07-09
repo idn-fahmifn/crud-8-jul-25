@@ -51,9 +51,11 @@
                         <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td>{{ $item->nama_kategori }}</td>
+                                    <td>{{ $item->judul_buku }}</td>
+                                    <td>{{ $item->penerbit }}</td>
+                                    <td>{{ $item->kategori->nama_kategori }}</td>
                                     <td>
-                                        <a href="{{ route('kategori.show', $item->id) }}" class="btn">Detail</a>
+                                        <a href="{{ route('buku.show', $item->id) }}" class="btn">Detail</a>
                                     </td>
                                 </tr>
                             @endforeach
