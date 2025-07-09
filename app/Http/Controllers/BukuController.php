@@ -6,6 +6,7 @@ use App\Models\Buku;
 use App\Models\Kategori;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BukuController extends Controller
 {
@@ -130,7 +131,8 @@ class BukuController extends Controller
     public function update(Request $request, $id)
     {
 
-        $data = Buku::find($id);
+        $data = Buku::find($id); 
+        $input = $request->all();
 
         $request->validate(
             [
@@ -180,7 +182,16 @@ class BukuController extends Controller
                 'deskripsi.required' => 'Deskripsi wajib diisi'
             ]
         );
+        
 
+        $edit = [
+            'id_kategori' => $request->input('kategori'),
+            'judul_buku' => $request->input('judul'),
+            'penerbit' => $request->input('penerbit'),
+            'penulis' => $request->input('penulis'),
+            'isbn' => $request->input('isbn'),
+            'deskripsi' => $request->input('kategori'),
+        ];
         // kondisi cek apabila terdapat file yang diupload di form.
         if ($request->hasFile('cover')) {
             $gambar = $request->file('cover'); //mengambil gambar di key cover
@@ -188,17 +199,20 @@ class BukuController extends Controller
             $format = $gambar->getClientOriginalExtension(); //mengambil format file yang diupload
             $nama = 'cover-buku' . Carbon::now()->format('dmyhis') . '.' . $format; //nama file ketika diupload
             $gambar->storeAs($path, $nama); //menyimpan gambar dengan path dan nama yang sudah ditentukan.
+            
+            // menghapus data lama dari local storage;
+            // Storage::delete('public/images/cover/'.$data->cover);
+
+            if($data->cover && Storage::disk('public')->exists('public/images/cover'));
+            $edit['cover'] = $nama;
+
         }
 
-        $data->update([
-            'id_kategori' => $request->kategori,
-            'judul_buku' => $request->judul,
-            'penerbit' => $request->penerbit,
-            // 'cover' => $nama,
-            'penulis' => $request->penulis,
-            'isbn' => $request->isbn,
-            'deskripsi' => $request->deskripsi
-        ]);
+        $data->update($edit);
+
+       
+
+        
 
         return back()->with('success', 'Buku berhasil dibuat');
     }
